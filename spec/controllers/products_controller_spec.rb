@@ -35,7 +35,7 @@ RSpec.describe ProductsController, type: :controller do
     context "success" do
       before do
         @products_count = Product.count
-        wholesale_price = rand(1.0..100.0)
+        wholesale_price = Random.new.rand(1.0..100.0).round(2)
 
         post :create, product: {
           name: FFaker::Lorem.words(5).join(" "),
@@ -122,7 +122,7 @@ RSpec.describe ProductsController, type: :controller do
         @new_description = FFaker::Lorem.sentence
         @new_category = FFaker::Lorem.words(3).join
         @new_sku = FFaker::Lorem.words(2).join
-        @new_wholesale = rand(1.0..100.0)
+        @new_wholesale = Random.new.rand(1.0..100.0).round(2)
         @new_retail = @new_wholesale * 4
 
         put :update, id: @product.id, product: { 

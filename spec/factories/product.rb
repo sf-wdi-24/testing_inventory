@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :product do
-    wholesale_price = rand(1.0..100.0)
+    wholesale_price = Random.new.rand(1.0..100.0).round(2)
     
     name { FFaker::Lorem.words(5).join(" ") }
     description { FFaker::Lorem.sentence }
