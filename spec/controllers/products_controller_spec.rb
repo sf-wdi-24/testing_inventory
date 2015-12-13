@@ -35,7 +35,16 @@ RSpec.describe ProductsController, type: :controller do
     context "success" do
       before do
         @products_count = Product.count
-        post :create, product: {  }
+        wholesale_price = rand(1.0..100.0)
+
+        post :create, product: {
+          name: FFaker::Lorem.words(5).join(" "),
+          description: FFaker::Lorem.sentence,
+          category: FFaker::Lorem.words(3).join,
+          sku: FFaker::Lorem.words(2).join,
+          wholesale: wholesale_price,
+          retail: wholesale_price * 4
+        }
       end
 
       it "should add new product to the database" do
@@ -51,7 +60,14 @@ RSpec.describe ProductsController, type: :controller do
     context "failed validations" do
       before do
         # create blank product (fails validations)
-        post :create, product: {  }
+        post :create, product: {
+          name: nil,
+          description: nil,
+          category: nil,
+          sku: nil,
+          wholesale: nil,
+          retail: nil
+        }
       end
 
       it "should display an error message" do
@@ -102,10 +118,21 @@ RSpec.describe ProductsController, type: :controller do
 
     context "success" do
       before do
-        @new_name =
-        @new_description =
-        @new_category =
-        put :update, id: @product.id, product: {  }
+        @new_name = FFaker::Lorem.words(5).join(" ")
+        @new_description = FFaker::Lorem.sentence
+        @new_category = FFaker::Lorem.words(3).join
+        @new_sku = FFaker::Lorem.words(2).join
+        @new_wholesale = rand(1.0..100.0)
+        @new_retail = @new_wholesale * 4
+
+        put :update, id: @product.id, product: { 
+          name: @new_name,
+          description: @new_description,
+          category: @new_category,
+          sku: @new_sku,
+          wholesale: @new_wholesale,
+          retail: @new_retail
+        }
         
         # reload @product to get changes from :update
         @product.reload
@@ -114,6 +141,10 @@ RSpec.describe ProductsController, type: :controller do
       it "should update product in the database" do
         expect(@product.name).to eq(@new_name)
         expect(@product.description).to eq(@new_description)
+        expect(@product.category).to eq(@new_category)
+        expect(@product.sku).to eq(@new_sku)
+        expect(@product.wholesale).to eq(@new_wholesale)
+        expect(@product.retail).to eq(@new_retail)
       end
 
       it "should redirect_to 'product_path'" do
@@ -125,7 +156,14 @@ RSpec.describe ProductsController, type: :controller do
     context "failed validations" do
       before do
         # update with blank product params (fails validations)
-        put :update, id: @product.id, product: {  }
+        put :update, id: @product.id, product: { 
+          name: nil,
+          description: nil,
+          category: nil,
+          sku: nil,
+          wholesale: nil,
+          retail: nil
+        }
       end
 
       it "should display an error message" do
