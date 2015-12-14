@@ -12,9 +12,10 @@
 
 ## Part 1: Products
 
-* The failing specs are for a `ProductsController`. For the first part of this lab, implement the functionality for the `ProductsController` to pass the tests. Some tips:
+* The failing specs are for a `ProductsController`. For the first part of this lab, implement the functionality for the `ProductsController` to pass the tests. **Some tips:**
   * Read the errors carefully. They will guide you as to what to do next.
   * Once you've gotten past the initial setup errors, and you have failing specs printing out in the Terminal, it may help to comment-out some of the specs to narrow in on what you're working on. Comment them back in when you're ready to work on them.
+* You DON'T need to implement fully-functioning views, but you can if you want to.
 * Once you have all the specs passing for the `ProductsController`, it's time to implement a unit test for products:
   * Products should have an instance method called `#margin` that calculates the <a href="http://retail.about.com/od/glossary/g/margin.htm" target="_blank">retail margin</a>.
   * **Write the spec for `#margin` before implementing the method!**
@@ -24,10 +25,11 @@ Feel free to reference the [solution branch](https://github.com/sf-wdi-24/testin
 
 ## Part 2: Items
 
-* A product should **have many items**. Use TDD to guide your implementation of CRUD for items. Follow the examples in `spec/controllers/products_controller_spec.rb` as a guideline for testing your `ItemsController`.
+* A product should **have many items**. Use TDD to guide your implementation of CRUD for items. Follow the examples in `spec/controllers/products_controller_spec.rb` as a guide for testing your `ItemsController`.
 * Items should have a minimum of three attributes: `size`, `color`, and `status`. Validate these three attributes for `presence`.
 * Items routes should be nested under products routes. See the <a href="http://guides.rubyonrails.org/routing.html#nested-resources" target="_blank">Rails docs for nested resources</a>.
-* Your `ItemsController` doesn't need an `#index` method, since your app should display all of a product's items on the `products#show` page.
+* Your `ItemsController` doesn't need an `#index` method, since your app should display all of a product's items on the `products#show` page. However, it should have the other six methods for RESTful routes (`#new`, `#create`, `#show`, `#edit`, `#update`, and `#destroy`).
+* You DON'T need to implement fully-functioning views, but you can if you want to.
 * Take advantage of the <a href="https://github.com/thoughtbot/factory_girl_rails" target="_blank">factory_girl_rails</a> and <a href="https://github.com/ffaker/ffaker" target="_blank">ffaker</a> gems to define an `item` factory to use in your tests.
 * Once you have passing specs for your `ItemsController`, it's time for another unit test:
   * Products should have an instance method called `#sell_through` that calculates the sell-through rate (items sold / total items).
