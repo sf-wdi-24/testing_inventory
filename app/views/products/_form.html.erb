@@ -1,0 +1,27 @@
+<%= form_for @product do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: "Product name", class: "form-control", autofocus: true %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, placeholder: "Brief product description", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :category %>
+    <%= f.text_field :category, placeholder: "Product category (e.g. Necklace)", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :sku %>
+    <%= f.text_field :sku, placeholder: "Product SKU (e.g. N3115)", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :wholesale %>
+    <%= f.number_field :wholesale, step: :any, placeholder: "Wholesale price", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :retail %>
+    <%= f.number_field :retail, step: :any, placeholder: "Retail price", class: "form-control" %>
+  </div>
+  <%= f.submit "Save Product", class: "btn btn-block btn-default" %>
+<% end %>
