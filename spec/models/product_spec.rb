@@ -13,6 +13,23 @@ RSpec.describe Product, type: :model do
         expect(@product.margin).to eq(@retail_margin)
       end
     end
+
+    describe "sell_through" do
+      before do
+        @product = FactoryGirl.create(:product)
+        5.times do
+          random_status = ["in", "out", "sold", "clearanced"].sample
+          @product.items.create(size: "M", color: "burgundy", status: random_status)
+        end
+        total_items = @product.items.count
+        items_sold = @product.items.where(status: "sold").count
+        @sell_through = (total_items - items_sold) / total_items
+      end
+
+      it "should calculate product's overall sell through" do
+        expect(@product.sell_through).to eq(@sell_through)
+      end
+    end
   end
 
 end
