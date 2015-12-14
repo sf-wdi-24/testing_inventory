@@ -23,10 +23,10 @@ RSpec.describe Product, type: :model do
         end
         total_items = @product.items.count
         items_sold = @product.items.where(status: "sold").count
-        @sell_through = (total_items - items_sold) / total_items
+        @sell_through = items_sold / total_items
       end
 
-      it "should calculate product's overall sell through" do
+      it "should calculate product's overall sell-through rate" do
         expect(@product.sell_through).to eq(@sell_through)
       end
     end
