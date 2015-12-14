@@ -171,7 +171,7 @@ RSpec.describe ProductsController, type: :controller do
       end
 
       it "should redirect_to 'edit_product_path'" do
-        expect(response).to redirect_to(edit_product_path)
+        expect(response).to redirect_to(edit_product_path(@product))
       end
     end
   end
@@ -179,12 +179,12 @@ RSpec.describe ProductsController, type: :controller do
   describe "#destroy" do
     before do
       product = FactoryGirl.create(:product)
-      @all_products = Product.count
+      @products_count = Product.count
       delete :destroy, id: product.id
     end
 
     it "should remove product from the database" do
-      expect(Product.count).to eq(@all_products - 1)
+      expect(Product.count).to eq(@products_count - 1)
     end
 
     it "should redirect_to 'root_path'" do
